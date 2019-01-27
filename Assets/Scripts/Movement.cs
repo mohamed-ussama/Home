@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     int layerMask;
     float rayDistance = 1.2f;
 
+    public Vector3Variable forwardVec;
+
     void Start()
     {
 
@@ -19,26 +21,30 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        //transform.forward = rb.velocity.normalized;
+        forwardVec.value = transform.forward;
+
         layerMask = 1 << 9;
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
-            Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
-        {
-            Move();
-            Debug.Log(rb.velocity);
-            Debug.Log(Input.GetAxis("Vertical"));
-            Debug.Log(Input.GetAxis("Horizontal"));
 
-        }
-
-        if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow)||
+        if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) ||
              Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.RightArrow)) & Grounded())
         {
+            transform.forward = forwardVec.value;
             rb.velocity = Vector3.zero;
         }
         if (Input.GetKeyDown(KeyCode.Space) & Grounded())
         {
             Jump();
         }
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
+            Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
+        {
+            Move();
+
+        }
+
+        
 
 
     }
@@ -49,8 +55,9 @@ public class Movement : MonoBehaviour
     }
     void Move()
     {
-        rb.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y,
+        rb.velocity = new Vector3(-Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y,
             Input.GetAxisRaw("Vertical") * speed);
+        transform.forward = rb.velocity.normalized;
     }
 
     bool Grounded()

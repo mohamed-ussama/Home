@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatchObj : MonoBehaviour
+public class CatchItem : MonoBehaviour
 {
 
     public float radius = 1f;
+    public float power = 2;
     int layerMask;
     Transform handTransform;
+
     public BoolVariable holding;
+    public Vector3Variable forwardDir;
+
     Transform obj;
     // Start is called before the first frame update
     void Start()
@@ -23,28 +27,32 @@ public class CatchObj : MonoBehaviour
         layerMask = 1 << 11;
         if (Input.GetKey(KeyCode.L))
         {
-            CatchObject();
+            CatchObj();
         }
-
+        if (Input.GetKey(KeyCode.K))
+        {
+            Throw();
+        }
     }
 
-    public void CatchObject()
+    public void CatchObj()
     {
         if (!holding.value)
         {
             Collider[] hitColliders = Physics.OverlapSphere(handTransform.position, radius, layerMask);
-            //int i = 0;
+
             if (hitColliders.Length == 1)
             {
-                hitColliders[0].GetComponent<Rigidbody>().isKinematic = false;
+                hitColliders[0].GetComponent<Rigidbody>().isKinematic = true;
                 hitColliders[0].transform.parent = handTransform;
                 holding.value = true;
             }
             else if (hitColliders.Length > 1)
             {
-               
-                for (int i = 0; i < hitColliders.Length && i + 1 == hitColliders.Length; i++)
+
+                for (int i = 0; i < hitColliders.Length && i + 1 != hitColliders.Length; i++)
                 {
+                    Debug.Log("awl "+i);
                     if (Vector3.Distance(hitColliders[i].transform.position, handTransform.position) >
                         Vector3.Distance(hitColliders[i + 1].transform.position, handTransform.position))
                     {
@@ -54,16 +62,17 @@ public class CatchObj : MonoBehaviour
                     {
                         obj = hitColliders[i].transform;
                     }
-                    
+                    Debug.Log(i);
                 }
+                Debug.Log("ahlan");
                 obj.GetComponent<Rigidbody>().isKinematic = true;
                 obj.parent = handTransform;
                 holding.value = true;
             }
         }
-            
-            
-        
+
+
+
     }
     public void Throw()
     {
@@ -72,9 +81,10 @@ public class CatchObj : MonoBehaviour
             obj = transform.GetChild(0);
             obj.parent = null;
             obj.GetComponent<Rigidbody>().isKinematic = false;
-           // obj.GetComponent<Rigidbody>().AddForce();
+            obj.GetComponent<Rigidbody>().velocity=(forwardDir.value * power);
+            holding.value = false;
         }
-    } 
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position, radius);
