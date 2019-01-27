@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 522711705}
   - component: {fileID: 522711704}
   - component: {fileID: 522711703}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1013,7 +1013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290641101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1504851807}
@@ -1178,8 +1178,8 @@ GameObject:
   - component: {fileID: 1504851808}
   - component: {fileID: 1504851810}
   - component: {fileID: 1504851809}
-  - component: {fileID: 1504851811}
   - component: {fileID: 1504851812}
+  - component: {fileID: 1504851813}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -1254,7 +1254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504851803}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 4.67, z: -3.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1290641102}
@@ -1270,12 +1270,12 @@ Rigidbody:
   m_GameObject: {fileID: 1504851803}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 3
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1504851809
 MonoBehaviour:
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504851803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f132ebb01e6ab354d90f74ed96c0d700, type: 3}
   m_Name: 
@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504851803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4676e8dfa5107c44b24fdaac5579278, type: 3}
   m_Name: 
@@ -1308,20 +1308,6 @@ MonoBehaviour:
   playerNum: 1
   Hand: {fileID: 1290641102}
   isGrounded: 0
---- !u!114 &1504851811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504851803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006085acd97117a4bb09007ccb106be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  _rigidbody: {fileID: 0}
 --- !u!114 &1504851812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,7 +1315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504851803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e20e04d1944ebb4e8d1c7d90c7a42ec, type: 3}
   m_Name: 
@@ -1337,6 +1323,20 @@ MonoBehaviour:
   damageAmount: 6
   healthBar: {fileID: 804854623}
   Player: {fileID: 0}
+--- !u!114 &1504851813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504851803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5d7fc9f1e955442b91239567f1816e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  JumpForce: 8
 --- !u!1 &1694468549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1350,7 @@ GameObject:
   - component: {fileID: 1694468551}
   - component: {fileID: 1694468550}
   - component: {fileID: 1694468554}
+  - component: {fileID: 1694468555}
   m_Layer: 0
   m_Name: CubeNonThrowable
   m_TagString: NonThrowable
@@ -1443,8 +1444,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1694468555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694468549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5d7fc9f1e955442b91239567f1816e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  JumpForce: 8
 --- !u!1 &1883252976
 GameObject:
   m_ObjectHideFlags: 0
