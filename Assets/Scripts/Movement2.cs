@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement2 : MonoBehaviour
 {
     public float speed = 10;
     public float JumpForce = 8;
@@ -26,25 +26,25 @@ public class Movement : MonoBehaviour
 
         layerMask = 1 << 9;
 
-        if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) ||
-             Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.RightArrow)) & Grounded())
+        if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) ||
+             Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D)) & Grounded())
         {
             transform.forward = forwardVec.value;
             rb.velocity = Vector3.zero;
         }
-        if (Input.GetKeyDown(KeyCode.Space) & Grounded())
+        if (Input.GetKeyDown(KeyCode.T) & Grounded())
         {
             Jump();
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
-            Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W))
         {
             Move();
 
         }
 
-        
+
 
 
     }
@@ -55,8 +55,8 @@ public class Movement : MonoBehaviour
     }
     void Move()
     {
-        rb.velocity = new Vector3(-Input.GetAxis("Horizontal1") * speed, rb.velocity.y,
-            Input.GetAxis("Vertical1") * speed);
+        rb.velocity = new Vector3(-Input.GetAxis("Horizontal2") * speed, rb.velocity.y,
+            Input.GetAxis("Vertical2") * speed);
         transform.forward = rb.velocity.normalized;
     }
 
